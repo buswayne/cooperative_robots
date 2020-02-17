@@ -7,4 +7,6 @@ The two robots share the same configuration and they are remotly operated from a
 From the workstation, it is possible to run two nodes, "aggregation" and "follow" that provide two examples of basic cooperative behaviour functions.
 
 More detailed information are given within the packages.
+
+
 ![Example: Aggregation](pictures/aggregation_1.png)
