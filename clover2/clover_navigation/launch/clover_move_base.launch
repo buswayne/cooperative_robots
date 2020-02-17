@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+ <group ns="clover2">
+  <!-- Run AMCL -->
+  <include file="$(find clover_navigation)/launch/clover_amcl.launch" />
+  <!-- Run Move Base -->
+  <include file="$(find clover_navigation)/launch/move_base.launch"/> 
+ </group> 
+</launch>

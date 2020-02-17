@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/skid_clover</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+
+<gazebo reference="base_link">
+<material>Gazebo/GreyTransparent</material>
+</gazebo>
+
+<gazebo reference="right_front_wheel">
+<material>Gazebo/SkyBlue</material>
+</gazebo>
+
+<gazebo reference="left_front_wheel">
+<material>Gazebo/SkyBlue</material>
+</gazebo>
+
+<gazebo reference="right_rear_wheel">
+<material>Gazebo/SkyBlue</material>
+</gazebo>
+
+<gazebo reference="left_rear_wheel">
+<material>Gazebo/SkyBlue</material>
+</gazebo>
+
+<gazebo reference="LIDAR_module_base">
+<material>Gazebo/GreyTransparent</material>
+</gazebo>
+
+<gazebo reference="hokuyo">
+<material>Gazebo/Black</material>
+</gazebo>
+
+</robot>

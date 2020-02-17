@@ -1,0 +1,25 @@
+use_map_topic: true
+odom_model_type: diff
+odom_frame_id: clover3/odom
+base_frame_id: clover3/robot_footprint
+
+gui_publish_rate: 1.0
+min_particles: 100
+max_particles: 1000
+kld_error: 0.01
+update_min_d: 0.2
+update_min_a: pi/6.0
+resample_interval: 3
+transform_tolerance: 0.5
+
+laser_max_beams: 45
+laser_max_range: -1
+laser_z_hit: 0.95
+laser_z_short: 0.1
+laser_z_max: 0.05
+laser z_rand: 0.05
+
+odom_alpha1: 0.5
+odom_alpha2: 0.4
+odom_alpha3: 0.1
+odom_alpha4: 0.4

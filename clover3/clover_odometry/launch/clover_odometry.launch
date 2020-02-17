@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+ <group ns="clover3">
+  <arg name="scan_topic" default="laser/scan" />
+
+  <!-- launch robot_description -->
+  <param name="tf_prefix" value="clover3" />
+  <include file="$(find clover_odometry)/launch/robot_description.launch" >
+   <arg name="robot_name" value="clover3"/>
+  </include>
+
+  <!-- launch urg_node -->
+
+  <node name="urg_node" pkg="urg_node" type="urg_node" output="screen">
+    <param name="ip_address" value=""/>
+    <param name="serial_port" value="/dev/ttyACM1"/>
+    <param name="serial_baud" value="9600"/>
+    <param name="frame_id" value="clover3/hokuyo"/>
+    <param name="calibrate_time" value="true"/>
+    <param name="publish_intensity" value="false"/>
+    <param name="publish_multiecho" value="false"/>
+    <param name="angle_min" value="-1.22"/>
+    <param name="angle_max" value="1.22"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+
+  </node>
+
+
+  <!-- launch laser odom -->
+  <node pkg="rf2o_laser_odometry" type="rf2o_laser_odometry_node" name="rf2o_laser_odometry" output="screen">
+    <param name="laser_scan_topic" value="laser/scan"/>        # topic where the lidar scans are being published
+    <param name="odom_topic" value="laser_odom" />              # topic where tu publish the odometry estimations
+    <param name="publish_tf" value="false" />                   # wheter or not to publish the tf::transform (base->odom)
+    <param name="base_frame_id" value="clover3/robot_footprint"/>            # frame_id (tf) of the mobile robot base. A tf transform from the laser_frame to the base_frame is mandatory
+    <param name="odom_frame_id" value="clover3/odom" />                # frame_id (tf) to publish the odometry estimations    
+    <param name="init_pose_from_topic" value="" /> # (Odom topic) Leave empty to start at point (0,0)
+    <param name="freq" value="10.0"/>                            # Execution frequency.
+    <param name="verbose" value="false" />                       # verbose
+  </node>
+
+  <!-- launch encoder odom   -->
+  <node name="odom_publisher_cpp" pkg="clover_odometry" type="odom_publisher_cpp"/>
+
+  <!-- launch extended kalman filter -->
+
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se" clear_params="true">
+    <rosparam command="load" file="$(find robot_localization)/params/ekf_template.yaml" />
+
+    <!--  Placeholder for output topic remapping -->
+    <remap from="odometry/filtered" to="odom"/>
+    <remap from="accel/filtered" to="accel"/>
+
+  </node>
+
+ </group>
+
+</launch>

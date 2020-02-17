@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- launch rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find clover_visualization)/launch/clover_rviz.rviz"/>
+
+</launch>

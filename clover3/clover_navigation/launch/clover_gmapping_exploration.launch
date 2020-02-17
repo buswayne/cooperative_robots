@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="scan_topic" default="skid_clover/laser/scan" />
+
+<!-- launch gmapping -->
+  <node pkg="gmapping"  type="slam_gmapping"  name="slam_gmapping"
+      output="screen">
+
+      <rosparam file="$(find clover_navigation)/config/gmapping_explore_params.yaml" command="load"/>
+
+      <remap from="scan" to="$(arg scan_topic)"/>
+
+  </node>
+
+</launch>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="scan_topic" default="laser/scan" />
+
+<!--
+  <arg name="map_file" default="$(find clover_navigation)/maps/room_1.yaml" />
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+  -->
+
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <rosparam file="$(find clover_navigation)/config/amcl_params.yaml" command="load"/>
+    <remap from="scan" to="$(arg scan_topic)"/>
+    <remap from="/clover3/map" to="/map" />
+  </node>
+
+</launch>
